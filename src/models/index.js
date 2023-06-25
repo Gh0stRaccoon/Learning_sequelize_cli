@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const pg = require('pg')
 const Sequelize = require('sequelize');
 const process = require('process');
 const basename = path.basename(__filename);
@@ -11,7 +12,7 @@ const db = {};
 
 let sequelize;
 
-sequelize = new Sequelize(config.database, config.username, config.password, config);
+sequelize = new Sequelize(config.database, config.username, config.password, { ...config, dialectModule: pg });
 
 fs
   .readdirSync(__dirname)
